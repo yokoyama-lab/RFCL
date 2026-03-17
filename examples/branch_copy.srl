@@ -1,0 +1,6 @@
+(x flag) (x y flag) ()
+if (!= flag 0) then
+  y ^= x;
+else
+fi (= y x)
+

@@ -1,0 +1,4 @@
+(flag x y) (flag x y) ()
+rif (!= flag 0)
+  x += y;
+rfi (!= flag 0)

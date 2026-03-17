@@ -1,0 +1,6 @@
+[project]
+name = "rev-fl"
+version = "0.1.0"
+description = "Minimal SRL interpreter and inverter"
+requires-python = ">=3.11"
+

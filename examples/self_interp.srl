@@ -1,0 +1,40 @@
+# Reversible self-interpreter for straight-line reversible programs.
+#
+# Interprets a program encoded as an array of (opcode, target, source)
+# triples operating on a variable store.
+#
+#   opcode 1: store[target] += store[source]
+#   opcode 2: store[target] -= store[source]
+#   opcode 3: store[target] ^= store[source]
+#
+# Precondition: target != source in each instruction.
+#
+# The interpreter itself is fully reversible: running its inverse on the
+# output recovers the original input (demonstrating r-Turing completeness).
+
+(code[30] n store[10]) (code[30] n store[10]) (pc op tgt src val)
+if (!= n 0) then
+  from (= pc 0) do
+    op ^= code[(* pc 3)];
+    tgt ^= code[(+ (* pc 3) 1)];
+    src ^= code[(+ (* pc 3) 2)];
+    val ^= store[src];
+    if (= op 1) then
+      store[tgt] += val;
+    else
+      if (= op 2) then
+        store[tgt] -= val;
+      else
+        store[tgt] ^= val;
+      fi (= op 2)
+    fi (= op 1)
+    val ^= store[src];
+    src ^= code[(+ (* pc 3) 2)];
+    tgt ^= code[(+ (* pc 3) 1)];
+    op ^= code[(* pc 3)];
+    pc += 1;
+  loop
+  until (= pc n)
+  pc -= n;
+else
+fi (!= n 0)

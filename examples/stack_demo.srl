@@ -1,0 +1,9 @@
+# Stack demonstration: swap x and y using a stack (dynamic data structure).
+# push var stack; — pushes var's value onto stack, zeros var
+# pop var stack;  — pops top of stack into var (var must be zero)
+# Inverse: push ↔ pop (push is the inverse of pop and vice versa)
+(x y) (x y) (s:stack)
+push x s;
+push y s;
+pop x s;
+pop y s;

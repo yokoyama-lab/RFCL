@@ -1,0 +1,7 @@
+(n) (acc) ()
+from (= acc 0) do
+  acc += 1;
+loop
+  n -= 1;
+  acc += 1;
+until (= n 0)
