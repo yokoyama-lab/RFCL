@@ -1,0 +1,470 @@
+{
+  "corpus_status_counts": {
+    "janus-examples": {
+      "ok": 16,
+      "illegal_by_design": 20,
+      "error": 1,
+      "no_main": 2
+    },
+    "reversible-algorithms": {
+      "ok": 120,
+      "error": 8,
+      "no_main": 3
+    }
+  },
+  "n_classified": 120,
+  "class_rule": {
+    "A1": "n_uncalls = 0, other families",
+    "A2": "n_uncalls = 0, family in {dp, floyd_warshall, bellman_ford, apsp}",
+    "B": "n_uncalls > 0, time_ratio < 1.6",
+    "C": "1.6 <= time_ratio <= 2.05",
+    "D": "time_ratio > 2.05",
+    "E": "n_uncalls > 0, fwd_steps < 0.10 * total_steps"
+  },
+  "class_stats": {
+    "A1": {
+      "count": 54,
+      "median_time_ratio": 1.0,
+      "median_transient_peak": 2.5,
+      "median_k_space": 0.423,
+      "median_k_time": 0.0,
+      "members": [
+        "avl/avl_insert.j",
+        "bfs/bfs.j",
+        "bsort/code/bsort1.j",
+        "bsort/code/bsort1_online.j",
+        "bsort/code/bsort4.j",
+        "bsort/code/bsort5.j",
+        "bsort/code/bsort_dijkstra79_A2.j",
+        "bsort/examples/bsort_inversiontable.j",
+        "bsort/examples/bsort_inversiontable_r2l.j",
+        "csort/csort1.j",
+        "depth_search/dsearch_matrix.j",
+        "dynarray/dynarray.j",
+        "hsort/hsort2.j",
+        "inc_code/inc_decfac.j",
+        "inc_code/inc_perm.j",
+        "isort/code/isort1_old.j",
+        "isort/code/isort2.j",
+        "isort/code/isort3.j",
+        "isort/code/isort4_old.j",
+        "isort/code/isort_dijkstra79_A1.j",
+        "isort/isort5.j",
+        "isort/isort7.j",
+        "isort/isort8.j",
+        "isort/isort_hall.j",
+        "linear_search/Lsearch3.j",
+        "msort/code/msort.j",
+        "msort/msort2.j",
+        "numeric/ext_gcd.j",
+        "numeric/gcd.j",
+        "numeric/modexp.j",
+        "others/code/factorial.j",
+        "others/examples/buildTree.j",
+        "others/examples/combination.j",
+        "others/examples/counting_sort.j",
+        "others/examples/factorization.j",
+        "others/examples/genParentheses.j",
+        "others/examples/genSuc.j",
+        "others/stackPermut.j",
+        "perm/code/perm2decfac_nolex.j",
+        "perm/code/perm2rank.j",
+        "perm/code/perm2rank2.j",
+        "perm/perm.j",
+        "perm/perm2.j",
+        "perm/perm2invtab1.j",
+        "scc/kosaraju.j",
+        "string_search/Force_str_search1-a.j",
+        "string_search/Force_str_search1-b.j",
+        "string_search/Force_str_search1-c.j",
+        "string_search/Force_str_search2-a.j",
+        "string_search/Force_str_search2-b.j",
+        "string_search/Force_str_search2-c.j",
+        "string_search/kmp2.j",
+        "toposort/toposort.j",
+        "treesort/treesort.j"
+      ],
+      "transient_peak_eq_0": 4,
+      "transient_peak_gt_0": 50
+    },
+    "A2": {
+      "count": 5,
+      "median_time_ratio": 1.0,
+      "median_transient_peak": 2.0,
+      "median_k_space": 0.314,
+      "median_k_time": 0.0,
+      "members": [
+        "bellman_ford/bellman_ford.j",
+        "dp/edit_distance.j",
+        "dp/knapsack.j",
+        "dp/lcs.j",
+        "floyd_warshall/floyd_warshall.j"
+      ]
+    },
+    "B": {
+      "count": 16,
+      "median_time_ratio": 1.336,
+      "median_transient_peak": 4.0,
+      "median_k_space": 0.647,
+      "median_k_time": 0.418,
+      "members": [
+        "avl/avl_delete.j",
+        "avl/avl_search.j",
+        "dijkstra/dijkstra.j",
+        "linear_search/list_sentinel4.j",
+        "minheap/minheap_GPC2018.j",
+        "minheap/minheap_Nohr2015.j",
+        "minheap/minheap_subset.j",
+        "mst/prim.j",
+        "others/code/lisort.j",
+        "others/examples/binarytree2e.j",
+        "others/examples/invtab2rank.j",
+        "qsort/code/qsort2.j",
+        "qsort/qsort2.j",
+        "rank/rank_perm.j",
+        "ssort/code/ssort.j",
+        "ssort/ssort1.j"
+      ]
+    },
+    "C": {
+      "count": 37,
+      "median_time_ratio": 1.808,
+      "median_transient_peak": 4.0,
+      "median_k_space": 0.559,
+      "median_k_time": 0.855,
+      "members": [
+        "apsp/apsp.j",
+        "bsort/bsort2.j",
+        "bsort/code/bsort2.j",
+        "bsort/code/bsort3.j",
+        "dp/lis.j",
+        "geometry/closest_pair.j",
+        "geometry/convex_hull.j",
+        "hsort/code/hsort1.j",
+        "hsort/code/hsort2.j",
+        "hsort/hsort3.j",
+        "isort/code/isort2_old.j",
+        "isort/code/isort3_old.j",
+        "isort/disort.j",
+        "isort/isort10.j",
+        "isort/isort6.j",
+        "isort/isort9.j",
+        "linear_search/Lsearch1.j",
+        "linear_search/Lsearch2.j",
+        "linear_search/Lsearch4.j",
+        "linear_search/Lsearch5.j",
+        "linear_search/Lsearch6.j",
+        "linear_search/Lsearch7.j",
+        "linear_search/list_sentinel1.j",
+        "linear_search/list_sentinel2.j",
+        "linear_search/list_sentinel3.j",
+        "linear_search/list_sentinel5.j",
+        "linear_search/sentinel1.j",
+        "linear_search/sentinel2.j",
+        "linear_search/sentinel3.j",
+        "linear_search/sentinel4.j",
+        "linear_search/sentinel5.j",
+        "msort/msort1.j",
+        "others/examples/linkedlist5e.j",
+        "others/examples/shell_sort1.j",
+        "qsort/code/qsort.j",
+        "qsort/code/qsort1.j",
+        "qsort/queue5e.j"
+      ]
+    },
+    "D": {
+      "count": 5,
+      "median_time_ratio": 2.963,
+      "median_transient_peak": 9.0,
+      "median_k_space": 0.812,
+      "median_k_time": 1.567,
+      "members": [
+        "isort/code/isort1.j",
+        "others/examples/breadth_first_search.j",
+        "others/examples/fact.j",
+        "perm/code/perm2decfac.j",
+        "rank/rank.j"
+      ]
+    },
+    "E": {
+      "count": 3,
+      "median_time_ratio": 18.0,
+      "median_transient_peak": 7.0,
+      "median_k_space": 0.862,
+      "median_k_time": 4.17,
+      "members": [
+        "others/code/decfac2rank.j",
+        "rank/rank_lexicographic.j",
+        "ssort/code/ssort1.j"
+      ]
+    }
+  },
+  "ccu_band_time_ratio": [
+    1.6,
+    2.05
+  ],
+  "ccu_band_k_time": [
+    0.678,
+    1.036
+  ],
+  "corpus_wide": {
+    "median_transient_peak": 3.0,
+    "max_transient_peak": 11,
+    "median_k_space": 0.505,
+    "n_k_space_ge_1": 10,
+    "n_time_ratio_eq_1": 59,
+    "n_uncalls_gt_0": 61
+  },
+  "scaling_fits": {
+    "numeric/gcd.j": {
+      "sizes": [
+        6,
+        9,
+        12,
+        15,
+        18,
+        21
+      ],
+      "time_ratio_first_last": [
+        1.0,
+        1.0
+      ],
+      "transient_peak_first_last": [
+        0.0,
+        0.0
+      ],
+      "slope_transient_peak_vs_log2T": 0.0,
+      "slope_log2T_vs_size": 0.118,
+      "intercept_log2T_vs_size": 4.046,
+      "base_T_vs_size": 1.085,
+      "slope_log2_time_ratio_vs_size": 0.0,
+      "intercept_log2_time_ratio_vs_size": 0.0,
+      "base_time_ratio_vs_size": 1.0
+    },
+    "others/code/factorial.j": {
+      "sizes": [
+        5,
+        10,
+        20,
+        40,
+        80,
+        160
+      ],
+      "time_ratio_first_last": [
+        1.0,
+        1.0
+      ],
+      "transient_peak_first_last": [
+        2.0,
+        2.0
+      ],
+      "slope_transient_peak_vs_log2T": 0.0,
+      "slope_log2T_vs_size": 0.027,
+      "intercept_log2T_vs_size": 5.143,
+      "base_T_vs_size": 1.019,
+      "slope_log2_time_ratio_vs_size": 0.0,
+      "intercept_log2_time_ratio_vs_size": 0.0,
+      "base_time_ratio_vs_size": 1.0
+    },
+    "others/examples/fact.j": {
+      "sizes": [
+        2,
+        4,
+        6,
+        8,
+        10,
+        12
+      ],
+      "time_ratio_first_last": [
+        1.7222,
+        418.8523
+      ],
+      "transient_peak_first_last": [
+        1.0,
+        11.0
+      ],
+      "slope_transient_peak_vs_log2T": 0.982,
+      "slope_log2T_vs_size": 1.018,
+      "intercept_log2T_vs_size": 2.999,
+      "base_T_vs_size": 2.025,
+      "slope_log2_time_ratio_vs_size": 0.797,
+      "intercept_log2_time_ratio_vs_size": -1.0,
+      "base_time_ratio_vs_size": 1.737
+    },
+    "dp/lcs.j": {
+      "sizes": [
+        3,
+        5,
+        8,
+        12,
+        16,
+        24
+      ],
+      "time_ratio_first_last": [
+        1.0,
+        1.0
+      ],
+      "transient_peak_first_last": [
+        2.0,
+        2.0
+      ],
+      "slope_transient_peak_vs_log2T": 0.0,
+      "slope_log2T_vs_size": 0.247,
+      "intercept_log2T_vs_size": 5.755,
+      "base_T_vs_size": 1.186,
+      "slope_log2_time_ratio_vs_size": 0.0,
+      "intercept_log2_time_ratio_vs_size": 0.0,
+      "base_time_ratio_vs_size": 1.0
+    },
+    "dp/knapsack.j": {
+      "sizes": [
+        2,
+        4,
+        6,
+        8,
+        12,
+        16
+      ],
+      "time_ratio_first_last": [
+        1.0,
+        1.0
+      ],
+      "transient_peak_first_last": [
+        2.0,
+        2.0
+      ],
+      "slope_transient_peak_vs_log2T": -0.0,
+      "slope_log2T_vs_size": 0.357,
+      "intercept_log2T_vs_size": 5.772,
+      "base_T_vs_size": 1.281,
+      "slope_log2_time_ratio_vs_size": 0.0,
+      "intercept_log2_time_ratio_vs_size": 0.0,
+      "base_time_ratio_vs_size": 1.0
+    },
+    "dp/lis.j": {
+      "sizes": [
+        4,
+        8,
+        12,
+        16,
+        24,
+        32
+      ],
+      "time_ratio_first_last": [
+        1.5714,
+        1.8982
+      ],
+      "transient_peak_first_last": [
+        5.0,
+        5.0
+      ],
+      "slope_transient_peak_vs_log2T": -0.0,
+      "slope_log2T_vs_size": 0.17,
+      "intercept_log2T_vs_size": 7.302,
+      "base_T_vs_size": 1.125,
+      "slope_log2_time_ratio_vs_size": 0.009,
+      "intercept_log2_time_ratio_vs_size": 0.688,
+      "base_time_ratio_vs_size": 1.006
+    },
+    "bsort/bsort2.j": {
+      "sizes": [
+        4,
+        6,
+        8,
+        12,
+        16,
+        24
+      ],
+      "time_ratio_first_last": [
+        1.8308,
+        1.9703
+      ],
+      "transient_peak_first_last": [
+        5.0,
+        5.0
+      ],
+      "slope_transient_peak_vs_log2T": 0.0,
+      "slope_log2T_vs_size": 0.227,
+      "intercept_log2T_vs_size": 6.669,
+      "base_T_vs_size": 1.17,
+      "slope_log2_time_ratio_vs_size": 0.004,
+      "intercept_log2_time_ratio_vs_size": 0.889,
+      "base_time_ratio_vs_size": 1.003
+    },
+    "msort/msort1.j": {
+      "sizes": [
+        2,
+        4,
+        8,
+        16,
+        32,
+        64
+      ],
+      "time_ratio_first_last": [
+        1.8478,
+        1.9756
+      ],
+      "transient_peak_first_last": [
+        5.0,
+        12.0
+      ],
+      "slope_transient_peak_vs_log2T": 0.946,
+      "slope_log2T_vs_size": 0.096,
+      "intercept_log2T_vs_size": 8.092,
+      "base_T_vs_size": 1.069,
+      "slope_log2_time_ratio_vs_size": 0.001,
+      "intercept_log2_time_ratio_vs_size": 0.935,
+      "base_time_ratio_vs_size": 1.001
+    }
+  },
+  "rfcl_k1": {
+    "n_S_exact": 24,
+    "n_S_below_pred": 4,
+    "S_below_pred_rows": [
+      "bennett_rif.srl [0 20 40]",
+      "bennett_rif.srl [0 80 160]",
+      "branch_copy.srl [20 0]",
+      "branch_copy.srl [80 0]"
+    ],
+    "n_ok_rows": 28,
+    "n_error_rows": 5,
+    "programs_ok": [
+      "bennett_rif.srl",
+      "branch_copy.srl",
+      "copy.srl",
+      "countdown_clean.srl",
+      "fib_bennett.srl",
+      "stack_demo.srl"
+    ],
+    "programs_error": [
+      "self_interp.srl"
+    ],
+    "T_bennett_minus_T_pred_values": [
+      5
+    ],
+    "S_bennett_minus_S_pred_values": [
+      -2,
+      -1,
+      0
+    ],
+    "T_bennett_minus_2T_values": [
+      8,
+      9,
+      10
+    ],
+    "S_bennett_minus_(S+log2T)_min_max": [
+      -5.349,
+      3.0
+    ],
+    "T_pred_formula": "2*T + |outputs| + 2 (tradeoff.py:81)",
+    "T_measured_formula": "2*T + |outputs| + 7  (= T_pred + 5)",
+    "plus5_breakdown": {
+      "loop_entry_guard": 1,
+      "loop_iteration_test": 1,
+      "loop_exit": 1,
+      "rif_dispatch_forward": 1,
+      "rif_dispatch_reverse": 1
+    }
+  },
+  "panel_a_x_clip": 3.2
+}

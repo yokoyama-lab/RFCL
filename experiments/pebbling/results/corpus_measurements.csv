@@ -1,0 +1,171 @@
+corpus,path,family,dialect_used,status,error,total_steps,fwd_steps,uncall_steps,time_ratio,max_live_vars,max_live_bits,live_init,live_final,transient_peak,log2_T,k_space,k_time,call_depth_max,local_var_max,n_calls,n_uncalls,peak_step,peak_fraction,wall_seconds,catalog_status
+janus-examples,kato131219_comp/131219/examples/call-array.j2,kato,jana2014,ok,,2,2,0,1.0,0,0,0,0,0,1.0,0.0,0.0,1,0,1,0,0,0.0,0.001,
+janus-examples,kato131219_comp/131219/examples/call-stack.j2,kato,jana2014,ok,,2,2,0,1.0,0,0,0,0,0,1.0,0.0,0.0,1,0,1,0,0,0.0,0.001,
+janus-examples,kato131219_comp/131219/examples/comment-multipleline.j2,kato,jana2014,ok,,1,1,0,1.0,0,0,0,0,0,0.0,,0.0,0,0,0,0,0,0.0,0.001,
+janus-examples,kato131219_comp/131219/examples/comment.j2,kato,jana2014,ok,,1,1,0,1.0,0,0,0,0,0,0.0,,0.0,0,0,0,0,0,0.0,0.001,
+janus-examples,kato131219_comp/131219/examples/if-then.j2,kato,jana2014,ok,,2,2,0,1.0,1,1,0,1,0,1.0,0.0,0.0,0,0,0,0,1,0.5,0.001,
+janus-examples,kato131219_comp/131219/examples/if-thenelse.j2,kato,jana2014,ok,,2,2,0,1.0,1,1,0,1,0,1.0,0.0,0.0,0,0,0,0,1,0.5,0.001,
+janus-examples,kato131219_comp/131219/examples/loop-do.j2,kato,jana2014,ok,,2,2,0,1.0,0,0,0,0,0,1.0,0.0,0.0,0,0,0,0,0,0.0,0.001,
+janus-examples,kato131219_comp/131219/examples/loop.j2,kato,jana2014,ok,,1,1,0,1.0,0,0,0,0,0,0.0,,0.0,0,0,0,0,0,0.0,0.0,
+janus-examples,kato131219_comp/131219/examples/modminus.j2,kato,jana2014,ok,,1,1,0,1.0,1,2,0,1,0,0.0,,0.0,0,0,0,0,1,1.0,0.0,
+janus-examples,kato131219_comp/131219/examples/reminder.j2,kato,jana2014,ok,,1,1,0,1.0,1,1,0,1,0,0.0,,0.0,0,0,0,0,1,1.0,0.0,
+janus-examples,kato131219_comp/131219/examples/show-array.j2,kato,jana2014,ok,,1,1,0,1.0,0,0,0,0,0,0.0,,0.0,0,0,0,0,0,0.0,0.0,
+janus-examples,kato131219_comp/131219/examples/show-stack.j2,kato,jana2014,ok,,1,1,0,1.0,0,0,0,0,0,0.0,,0.0,0,0,0,0,0,0.0,0.0,
+janus-examples,kato131219_comp/131219/examples/show.j2,kato,jana2014,ok,,1,1,0,1.0,0,0,0,0,0,0.0,,0.0,0,0,0,0,0,0.0,0.0,
+janus-examples,kato131219_comp/131219/examples/swap-array.j2,kato,jana2014,ok,,2,2,0,1.0,1,2,0,1,0,1.0,0.0,0.0,0,0,0,0,1,0.5,0.001,
+janus-examples,kato131219_comp/131219/examples/swap-stack.j2,kato,jana2014,ok,,3,3,0,1.0,1,2,0,1,0,1.585,0.0,0.0,0,0,0,0,1,0.3333,0.001,
+janus-examples,kato131219_comp/131219/examples_illegal/alias-array.j2,kato,jana2014,illegal_by_design,line 3: Identifiers `a' and `a' are aliases,,,,,,,,,,,,,,,,,,,0.001,
+janus-examples,kato131219_comp/131219/examples_illegal/array-illegal-operate.j2,kato,jana2014,illegal_by_design,line 3: Couldn't match expected type `array[2]',,,,,,,,,,,,,,,,,,,0.001,
+janus-examples,kato131219_comp/131219/examples_illegal/array-out-of-bounds-exp.j2,kato,jana2014,illegal_by_design,line 5: Array index `[2]' was out of bounds (array size was [2]),,,,,,,,,,,,,,,,,,,0.001,
+janus-examples,kato131219_comp/131219/examples_illegal/array-size-exp.j2,kato,jana2014,illegal_by_design,line 1: Expecting statement,,,,,,,,,,,,,,,,,,,0.0,
+janus-examples,kato131219_comp/131219/examples_illegal/div-zero.j2,kato,jana2014,illegal_by_design,line 3: Division by zero,,,,,,,,,,,,,,,,,,,0.001,
+janus-examples,kato131219_comp/131219/examples_illegal/local-name-duplication.j2,kato,jana2014,illegal_by_design,line 2: Variable name `x' is already bound,,,,,,,,,,,,,,,,,,,0.0,
+janus-examples,kato131219_comp/131219/examples_illegal/loop-missing-from.j2,kato,jana2014,illegal_by_design,line 3: Expecting identifier,,,,,,,,,,,,,,,,,,,0.0,
+janus-examples,kato131219_comp/131219/examples_illegal/loop-uncompleted.j2,kato,jana2014,illegal_by_design,"line 5: Unexpected ""end of input""",,,,,,,,,,,,,,,,,,,0.0,
+janus-examples,kato131219_comp/131219/examples_illegal/missing-delocal.j2,kato,jana2014,illegal_by_design,ran without error under jana2014,1,1,0,1.0,0,0,0,0,0,0.0,,0.0,0,0,0,0,0,0.0,0.001,
+janus-examples,kato131219_comp/131219/examples_illegal/missing-local.j2,kato,jana2014,illegal_by_design,line 2: Expecting identifier,,,,,,,,,,,,,,,,,,,0.0,
+janus-examples,kato131219_comp/131219/examples_illegal/missing-then-else.j2,kato,janus1982ext,illegal_by_design,ran without error under janus1982ext,2,2,0,1.0,1,1,0,1,0,1.0,0.0,0.0,0,0,0,0,1,0.5,0.004,
+janus-examples,kato131219_comp/131219/examples_illegal/missing-then.j2,kato,janus1982ext,illegal_by_design,line 6: Assertion failed: should be true,,,,,,,,,,,,,,,,,,,0.001,
+janus-examples,kato131219_comp/131219/examples_illegal/moddiv.j2,kato,jana2014,illegal_by_design,ran without error under jana2014,1,1,0,1.0,0,0,0,0,0,0.0,,0.0,0,0,0,0,0,0.0,0.0,
+janus-examples,kato131219_comp/131219/examples_illegal/modmult.j2,kato,jana2014,illegal_by_design,ran without error under jana2014,1,1,0,1.0,0,0,0,0,0,0.0,,0.0,0,0,0,0,0,0.0,0.0,
+janus-examples,kato131219_comp/131219/examples_illegal/modreminder.j2,kato,jana2014,illegal_by_design,line 3: Expecting statement,,,,,,,,,,,,,,,,,,,0.0,
+janus-examples,kato131219_comp/131219/examples_illegal/parse-error-procedure-name.j2,kato,jana2014,illegal_by_design,line 1: Expecting identifier,,,,,,,,,,,,,,,,,,,0.0,
+janus-examples,kato131219_comp/131219/examples_illegal/procedure-name-reserved-word.j2,kato,jana2014,illegal_by_design,line 1: Expecting identifier,,,,,,,,,,,,,,,,,,,0.0,
+janus-examples,kato131219_comp/131219/examples_illegal/reminder-zero.j2,kato,jana2014,illegal_by_design,line 3: Division by zero,,,,,,,,,,,,,,,,,,,0.0,
+janus-examples,kato131219_comp/131219/examples_illegal/stack-array.j2,kato,jana2014,illegal_by_design,line 1: Expecting statement,,,,,,,,,,,,,,,,,,,0.0,
+janus-examples,kato131219_comp/131219/examples_illegal/stack-illegal-operate.j2,kato,jana2014,illegal_by_design,line 3: Couldn't match expected type `stack',,,,,,,,,,,,,,,,,,,0.001,
+janus-examples,watanabe/J1/Factorization program.j1,watanabe,janus1982,error,"line 22: Unexpected ""¥""",,,,,,,,,,,,,,,,,,,0.002,
+janus-examples,watanabe/J1/Fibonacci program.j1,watanabe,janus1982(main_fwd->main),ok,,25,25,0,1.0,2,7,0,2,0,4.644,0.0,0.0,5,0,5,0,7,0.28,0.002,
+janus-examples,watanabe/J1/Sorting the list program.j1,watanabe,janus1982,no_main,no main procedure (or empty main),,,,,,,,,,,,,,,,,,,,
+janus-examples,watanabe/J1/Stack program.j1,watanabe,janus1982,no_main,no main procedure (or empty main),,,,,,,,,,,,,,,,,,,,
+reversible-algorithms,apsp/apsp.j,apsp,jana2014,ok,,1926,1117,809,1.7243,14,389,0,4,10,10.911,0.916,0.786,4,10,67,32,1161,0.6028,0.106,reversible
+reversible-algorithms,avl/avl_delete.j,avl,jana2014,ok,,810,805,5,1.0062,14,165,0,10,4,9.662,0.414,0.009,7,5,137,1,738,0.9111,0.067,reversible
+reversible-algorithms,avl/avl_insert.j,avl,jana2014,ok,,691,691,0,1.0,13,146,0,9,4,9.433,0.424,0.0,7,5,119,0,152,0.22,0.089,reversible
+reversible-algorithms,avl/avl_search.j,avl,jana2014,ok,,61,44,17,1.3864,8,60,0,5,3,5.931,0.506,0.471,2,2,4,2,24,0.3934,0.005,reversible
+reversible-algorithms,bellman_ford/bellman_ford.j,bellman_ford,jana2014,ok,,327,327,0,1.0,15,187,0,11,4,8.353,0.479,0.0,1,4,1,0,171,0.5229,0.021,reversible
+reversible-algorithms,bfs/bfs.j,bfs,jana2014,ok,,206,206,0,1.0,10,58,0,8,2,7.687,0.26,0.0,1,3,1,0,56,0.2718,0.011,reversible
+reversible-algorithms,bsort/bsort2.j,bsort,jana2014,ok,,247,131,116,1.8855,8,69,0,3,5,7.948,0.629,0.915,1,4,1,1,145,0.587,0.01,reversible
+reversible-algorithms,bsort/code/bsort1.j,bsort,jana2014,ok,,91,91,0,1.0,5,30,2,3,2,6.508,0.307,0.0,1,3,1,0,28,0.3077,0.004,reversible
+reversible-algorithms,bsort/code/bsort1_online.j,bsort,jana2014,ok,,118,118,0,1.0,6,30,0,3,3,6.883,0.436,0.0,1,3,1,0,47,0.3983,0.005,reversible
+reversible-algorithms,bsort/code/bsort2.j,bsort,jana2014,ok,,199,109,90,1.8257,7,41,2,3,4,7.637,0.524,0.868,2,4,3,1,123,0.6181,0.009,reversible
+reversible-algorithms,bsort/code/bsort3.j,bsort,jana2014,ok,,199,109,90,1.8257,7,41,2,3,4,7.637,0.524,0.868,2,4,3,1,123,0.6181,0.008,reversible
+reversible-algorithms,bsort/code/bsort4.j,bsort,jana2014,ok,,71,71,0,1.0,5,28,2,3,2,6.15,0.325,0.0,1,2,1,0,22,0.3099,0.004,reversible
+reversible-algorithms,bsort/code/bsort5.j,bsort,jana2014,ok,,68,68,0,1.0,5,27,2,3,2,6.087,0.329,0.0,1,2,1,0,4,0.0588,0.005,reversible
+reversible-algorithms,bsort/code/bsort_dijkstra79_A2.j,bsort,jana2014,ok,,62,62,0,1.0,4,18,1,1,3,5.954,0.504,0.0,1,2,1,0,5,0.0806,0.003,reversible
+reversible-algorithms,bsort/code/bsort_irev.j,bsort,jana2014,error,line 5: Expecting statement,,,,,,,,,,,,,,,,,,,0.001,by_design
+reversible-algorithms,bsort/examples/bsort_inversiontable.j,bsort,jana2014,ok,,65,65,0,1.0,6,44,0,3,3,6.022,0.498,0.0,1,3,1,0,15,0.2308,0.004,reversible
+reversible-algorithms,bsort/examples/bsort_inversiontable_r2l.j,bsort,jana2014,ok,,156,156,0,1.0,6,41,0,3,3,7.285,0.412,0.0,1,3,1,0,51,0.3269,0.007,reversible
+reversible-algorithms,csort/csort1.j,csort,jana2014,ok,,67,67,0,1.0,6,46,0,5,1,6.066,0.165,0.0,1,1,1,0,43,0.6418,0.004,reversible
+reversible-algorithms,depth_search/dsearch1.j,depth_search,jana2014,no_main,no main procedure (or empty main),,,,,,,,,,,,,,,,,,,,library
+reversible-algorithms,depth_search/dsearch2.j,depth_search,jana2014,no_main,no main procedure (or empty main),,,,,,,,,,,,,,,,,,,,library
+reversible-algorithms,depth_search/dsearch3.j,depth_search,jana2014,no_main,no main procedure (or empty main),,,,,,,,,,,,,,,,,,,,library
+reversible-algorithms,depth_search/dsearch_matrix.j,depth_search,jana2014,ok,,136,136,0,1.0,9,32,0,6,3,7.087,0.423,0.0,4,5,5,0,54,0.3971,0.007,reversible
+reversible-algorithms,dijkstra/dijkstra.j,dijkstra,jana2014,ok,,451,327,124,1.3792,14,167,0,7,7,8.817,0.794,0.464,3,7,11,5,135,0.2993,0.023,reversible
+reversible-algorithms,dp/edit_distance.j,dp,jana2014,ok,,285,285,0,1.0,7,171,0,5,2,8.155,0.245,0.0,1,2,1,0,48,0.1684,0.022,reversible
+reversible-algorithms,dp/knapsack.j,dp,jana2014,ok,,83,83,0,1.0,7,55,0,5,2,6.375,0.314,0.0,1,2,1,0,15,0.1807,0.007,reversible
+reversible-algorithms,dp/lcs.j,dp,jana2014,ok,,168,168,0,1.0,7,87,0,5,2,7.392,0.271,0.0,1,2,1,0,27,0.1607,0.013,reversible
+reversible-algorithms,dp/lis.j,dp,jana2014,ok,,474,274,200,1.7299,9,85,0,4,5,8.889,0.563,0.791,2,6,10,9,96,0.2025,0.017,reversible
+reversible-algorithms,dynarray/dynarray.j,dynarray,jana2014,ok,,62,62,0,1.0,8,53,0,7,1,5.954,0.168,0.0,1,1,8,0,56,0.9032,0.004,reversible
+reversible-algorithms,floyd_warshall/floyd_warshall.j,floyd_warshall,jana2014,ok,,412,412,0,1.0,10,173,0,5,5,8.687,0.576,0.0,1,5,1,0,253,0.6141,0.019,reversible
+reversible-algorithms,geometry/closest_pair.j,geometry,jana2014,ok,,155,87,68,1.7816,11,117,0,5,6,7.276,0.825,0.833,2,7,2,1,85,0.5484,0.009,reversible
+reversible-algorithms,geometry/convex_hull.j,geometry,jana2014,ok,,359,213,146,1.6854,12,54,0,5,7,8.488,0.825,0.753,3,7,11,5,256,0.7131,0.025,reversible
+reversible-algorithms,hsort/code/hsort1.j,hsort,jana2014,ok,,670,355,315,1.8873,14,111,0,3,11,9.388,1.172,0.916,7,15,39,37,530,0.791,0.033,reversible
+reversible-algorithms,hsort/code/hsort2.j,hsort,jana2014,ok,,494,267,227,1.8502,13,104,0,3,10,8.948,1.118,0.888,7,15,37,35,393,0.7955,0.023,reversible
+reversible-algorithms,hsort/hsort2.j,hsort,jana2014,ok,,396,396,0,1.0,13,82,0,3,10,8.629,1.159,0.0,6,15,37,0,145,0.3662,0.021,reversible
+reversible-algorithms,hsort/hsort3.j,hsort,jana2014,ok,,791,416,375,1.9014,13,103,0,3,10,9.628,1.039,0.927,7,14,50,48,677,0.8559,0.036,reversible
+reversible-algorithms,inc_code/inc_decfac.j,inc_code,jana2014,ok,,31,31,0,1.0,3,15,0,1,2,4.954,0.404,0.0,1,1,1,0,7,0.2258,0.003,reversible
+reversible-algorithms,inc_code/inc_perm.j,inc_code,jana2014,ok,,42,42,0,1.0,6,30,0,3,3,5.392,0.556,0.0,2,3,3,0,34,0.8095,0.006,reversible
+reversible-algorithms,isort/code/isort1.j,isort,jana2014,ok,,278,72,206,3.8611,9,44,2,3,6,8.119,0.739,1.949,3,6,8,12,37,0.1331,0.017,reversible
+reversible-algorithms,isort/code/isort1_old.j,isort,jana2014,ok,,47,47,0,1.0,5,24,2,3,2,5.555,0.36,0.0,1,2,1,0,9,0.1915,0.004,reversible
+reversible-algorithms,isort/code/isort2.j,isort,jana2014,ok,,82,82,0,1.0,5,31,2,3,2,6.358,0.315,0.0,1,2,2,0,16,0.1951,0.006,reversible
+reversible-algorithms,isort/code/isort2_old.j,isort,jana2014,ok,,111,65,46,1.7077,6,35,2,3,3,6.794,0.442,0.772,2,3,3,1,64,0.5766,0.005,reversible
+reversible-algorithms,isort/code/isort3.j,isort,jana2014,ok,,43,43,0,1.0,5,25,2,3,2,5.426,0.369,0.0,1,2,1,0,4,0.093,0.003,reversible
+reversible-algorithms,isort/code/isort3_old.j,isort,jana2014,ok,,111,65,46,1.7077,6,35,2,3,3,6.794,0.442,0.772,2,3,3,1,64,0.5766,0.006,reversible
+reversible-algorithms,isort/code/isort4_old.j,isort,jana2014,ok,,78,78,0,1.0,5,31,2,3,2,6.285,0.318,0.0,1,2,2,0,16,0.2051,0.004,reversible
+reversible-algorithms,isort/code/isort_dijkstra79_A1.j,isort,jana2014,ok,,49,49,0,1.0,5,24,0,2,3,5.615,0.534,0.0,1,2,1,0,11,0.2245,0.003,reversible
+reversible-algorithms,isort/code/isort_irev.j,isort,jana2014,error,line 5: Expecting statement,,,,,,,,,,,,,,,,,,,0.001,by_design
+reversible-algorithms,isort/code/isort_irev1.j,isort,jana2014,error,line 18: Expecting statement,,,,,,,,,,,,,,,,,,,0.002,by_design
+reversible-algorithms,isort/disort.j,isort,jana2014,ok,,238,139,99,1.7122,6,75,0,3,3,7.895,0.38,0.776,2,3,7,6,57,0.2395,0.009,reversible
+reversible-algorithms,isort/isort10.j,isort,jana2014,ok,,401,208,193,1.9279,7,70,0,2,5,8.647,0.578,0.947,2,3,5,4,115,0.2868,0.019,reversible
+reversible-algorithms,isort/isort5.j,isort,jana2014,ok,,75,75,0,1.0,7,55,0,3,4,6.229,0.642,0.0,1,4,1,0,30,0.4,0.006,reversible
+reversible-algorithms,isort/isort6.j,isort,jana2014,ok,,149,82,67,1.8171,8,60,0,3,5,7.219,0.693,0.862,1,4,1,1,85,0.5705,0.007,reversible
+reversible-algorithms,isort/isort7.j,isort,jana2014,ok,,127,127,0,1.0,7,63,0,3,4,6.989,0.572,0.0,1,4,1,0,18,0.1417,0.006,reversible
+reversible-algorithms,isort/isort8.j,isort,jana2014,ok,,53,53,0,1.0,6,44,0,3,3,5.728,0.524,0.0,1,3,1,0,23,0.434,0.004,reversible
+reversible-algorithms,isort/isort9.j,isort,jana2014,ok,,204,106,98,1.9245,6,38,0,2,4,7.672,0.521,0.945,1,3,1,1,26,0.1275,0.016,reversible
+reversible-algorithms,isort/isort_hall.j,isort,jana2014,ok,,86,86,0,1.0,7,42,0,3,4,6.426,0.622,0.0,1,4,1,0,35,0.407,0.008,reversible
+reversible-algorithms,linear_search/Lsearch1.j,linear_search,jana2014,ok,,138,73,65,1.8904,5,42,1,3,2,7.109,0.281,0.919,2,4,2,1,8,0.058,0.006,reversible
+reversible-algorithms,linear_search/Lsearch2.j,linear_search,jana2014,ok,,137,72,65,1.9028,4,38,1,2,2,7.098,0.282,0.928,1,4,1,1,8,0.0584,0.006,reversible
+reversible-algorithms,linear_search/Lsearch3.j,linear_search,jana2014,ok,,25,25,0,1.0,4,41,1,3,1,4.644,0.215,0.0,1,1,1,0,4,0.16,0.005,reversible
+reversible-algorithms,linear_search/Lsearch4.j,linear_search,jana2014,ok,,179,104,75,1.7212,7,38,0,3,4,7.484,0.534,0.783,2,5,2,1,110,0.6145,0.007,reversible
+reversible-algorithms,linear_search/Lsearch5.j,linear_search,jana2014,ok,,181,105,76,1.7238,7,38,0,3,4,7.5,0.533,0.786,2,5,2,1,108,0.5967,0.007,reversible
+reversible-algorithms,linear_search/Lsearch6.j,linear_search,jana2014,ok,,264,146,118,1.8082,6,33,0,2,4,8.044,0.497,0.855,1,5,1,1,150,0.5682,0.008,reversible
+reversible-algorithms,linear_search/Lsearch7.j,linear_search,jana2014,ok,,181,104,77,1.7404,6,35,0,3,3,7.5,0.4,0.799,1,4,1,1,107,0.5912,0.006,reversible
+reversible-algorithms,linear_search/list_sentinel1.j,linear_search,jana2014,ok,,88,48,40,1.8333,7,60,1,4,3,6.459,0.464,0.874,2,4,2,1,45,0.5114,0.005,reversible
+reversible-algorithms,linear_search/list_sentinel2.j,linear_search,jana2014,ok,,57,32,25,1.7812,8,57,1,4,4,5.833,0.686,0.833,1,4,1,1,31,0.5439,0.003,reversible
+reversible-algorithms,linear_search/list_sentinel3.j,linear_search,jana2014,ok,,137,84,53,1.631,7,53,0,3,4,7.098,0.564,0.706,2,5,2,1,91,0.6642,0.007,reversible
+reversible-algorithms,linear_search/list_sentinel4.j,linear_search,jana2014,ok,,60,45,15,1.3333,7,49,0,3,4,5.907,0.677,0.415,1,5,1,1,43,0.7167,0.008,reversible
+reversible-algorithms,linear_search/list_sentinel5.j,linear_search,jana2014,ok,,135,82,53,1.6463,6,53,0,3,3,7.077,0.424,0.719,1,4,1,1,91,0.6741,0.005,reversible
+reversible-algorithms,linear_search/sentinel1.j,linear_search,jana2014,ok,,56,32,24,1.75,8,48,1,4,4,5.807,0.689,0.807,2,4,2,1,30,0.5357,0.005,reversible
+reversible-algorithms,linear_search/sentinel2.j,linear_search,jana2014,ok,,91,49,42,1.8571,7,54,1,4,3,6.508,0.461,0.893,1,4,1,1,47,0.5165,0.007,reversible
+reversible-algorithms,linear_search/sentinel3.j,linear_search,jana2014,ok,,143,86,57,1.6628,7,36,0,3,4,7.16,0.559,0.734,2,5,2,1,83,0.5804,0.009,reversible
+reversible-algorithms,linear_search/sentinel4.j,linear_search,jana2014,ok,,214,121,93,1.7686,7,42,0,3,4,7.741,0.517,0.823,1,5,1,1,119,0.5561,0.008,reversible
+reversible-algorithms,linear_search/sentinel5.j,linear_search,jana2014,ok,,222,125,97,1.776,6,41,0,3,3,7.794,0.385,0.829,1,5,1,1,179,0.8063,0.009,reversible
+reversible-algorithms,minheap/minheap_GPC2018.j,minheap,jana2014,ok,,40,37,3,1.0811,9,35,5,6,3,5.322,0.564,0.112,2,4,4,3,4,0.1,0.007,reversible
+reversible-algorithms,minheap/minheap_Nohr2015.j,minheap,jana2014,ok,,472,437,35,1.0801,27,309,2,24,3,8.883,0.338,0.111,5,10,63,35,438,0.928,0.053,reversible
+reversible-algorithms,minheap/minheap_Nohr2015_w_macro.j,minheap,jana2014,error,line 49: Expecting identifier,,,,,,,,,,,,,,,,,,,0.004,by_design
+reversible-algorithms,minheap/minheap_subset.j,minheap,jana2014,ok,,469,434,35,1.0806,27,225,0,24,3,8.873,0.338,0.112,5,10,63,35,435,0.9275,0.045,reversible
+reversible-algorithms,msort/code/msort.j,msort,jana2014,ok,,335,335,0,1.0,13,103,3,3,10,8.388,1.192,0.0,5,7,23,0,227,0.6776,0.025,reversible
+reversible-algorithms,msort/msort1.j,msort,jana2014,ok,,773,396,377,1.952,12,74,0,3,9,9.594,0.938,0.965,4,9,22,22,509,0.6585,0.033,reversible
+reversible-algorithms,msort/msort2.j,msort,jana2014,ok,,505,505,0,1.0,13,56,0,3,10,8.98,1.114,0.0,4,11,22,0,86,0.1703,0.039,reversible
+reversible-algorithms,mst/prim.j,mst,jana2014,ok,,462,340,122,1.3588,16,179,0,9,7,8.852,0.791,0.442,3,7,11,5,321,0.6948,0.03,reversible
+reversible-algorithms,numeric/ext_gcd.j,numeric,jana2014,ok,,46,46,0,1.0,8,34,0,6,2,5.524,0.362,0.0,1,1,1,0,15,0.3261,0.003,reversible
+reversible-algorithms,numeric/gcd.j,numeric,jana2014,ok,,16,16,0,1.0,3,12,0,3,0,4.0,0.0,0.0,1,1,1,0,4,0.25,0.002,reversible
+reversible-algorithms,numeric/modexp.j,numeric,jana2014,ok,,67,67,0,1.0,9,77,0,6,3,6.066,0.495,0.0,1,2,1,0,18,0.2687,0.003,reversible
+reversible-algorithms,others/code/decfac2rank.j,others,jana2014,ok,,36,2,34,18.0,6,18,1,2,4,5.17,0.774,4.17,2,3,1,1,6,0.1667,0.004,reversible
+reversible-algorithms,others/code/factorial.j,others,jana2014,ok,,20,20,0,1.0,4,18,0,2,2,4.322,0.463,0.0,1,2,1,0,4,0.2,0.002,reversible
+reversible-algorithms,others/code/lisort.j,others,jana2014,ok,,114,79,35,1.443,7,40,2,3,4,6.833,0.585,0.529,2,5,1,5,33,0.2895,0.005,reversible
+reversible-algorithms,others/examples/binarytree2e.j,others,jana2014,ok,,379,283,96,1.3392,11,100,0,8,3,8.566,0.35,0.421,4,3,51,24,352,0.9288,0.021,reversible
+reversible-algorithms,others/examples/breadth_first_search.j,others,jana2014,ok,,1279,570,709,2.2439,18,203,0,8,10,10.321,0.969,1.166,5,5,100,81,940,0.7349,0.071,reversible
+reversible-algorithms,others/examples/buildTree.j,others,jana2014,ok,,87,87,0,1.0,8,52,0,5,3,6.443,0.466,0.0,1,3,1,0,35,0.4023,0.005,reversible
+reversible-algorithms,others/examples/combination.j,others,jana2014,ok,,21,21,0,1.0,5,15,0,3,2,4.392,0.455,0.0,1,2,1,0,7,0.3333,0.004,reversible
+reversible-algorithms,others/examples/counting_sort.j,others,jana2014,ok,,67,67,0,1.0,6,46,0,5,1,6.066,0.165,0.0,1,1,1,0,42,0.6269,0.005,reversible
+reversible-algorithms,others/examples/fact.j,others,jana2014,ok,,283,39,244,7.2564,6,19,0,2,4,8.145,0.491,2.859,6,5,32,31,180,0.636,0.01,reversible
+reversible-algorithms,others/examples/factorization.j,others,jana2014,ok,,231,231,0,1.0,4,32,0,1,3,7.852,0.382,0.0,2,2,6,0,5,0.0216,0.006,reversible
+reversible-algorithms,others/examples/genParentheses.j,others,jana2014,ok,,202,202,0,1.0,8,23,0,1,7,7.658,0.914,0.0,7,5,22,0,19,0.0941,0.02,reversible
+reversible-algorithms,others/examples/genSuc.j,others,jana2014,ok,,64,64,0,1.0,5,14,0,2,3,6.0,0.5,0.0,1,3,2,0,13,0.2031,0.005,reversible
+reversible-algorithms,others/examples/invtab2rank.j,others,jana2014,ok,,90,60,30,1.5,6,63,0,2,4,6.492,0.616,0.585,2,3,1,1,19,0.2111,0.005,reversible
+reversible-algorithms,others/examples/linkedlist5e.j,others,jana2014,ok,,307,186,121,1.6505,7,79,0,5,2,8.262,0.242,0.723,3,3,35,27,137,0.4463,0.016,reversible
+reversible-algorithms,others/examples/shell_sort1.j,others,jana2014,ok,,319,171,148,1.8655,8,78,0,3,5,8.317,0.601,0.9,1,4,1,1,174,0.5455,0.013,reversible
+reversible-algorithms,others/matrixmult.j,others,jana2014,error,"line 1: Unexpected ""n""",,,,,,,,,,,,,,,,,,,0.007,by_design
+reversible-algorithms,others/stackPermut.j,others,jana2014,ok,,752,752,0,1.0,8,18,0,2,6,9.555,0.628,0.0,9,4,64,0,97,0.129,0.031,reversible
+reversible-algorithms,perm/code/perm2decfac.j,perm,jana2014,ok,,723,244,479,2.9631,13,62,0,2,11,9.498,1.158,1.567,3,11,23,23,436,0.603,0.035,reversible
+reversible-algorithms,perm/code/perm2decfac_nolex.j,perm,jana2014,ok,,105,105,0,1.0,5,48,0,2,3,6.714,0.447,0.0,2,3,3,0,38,0.3619,0.005,reversible
+reversible-algorithms,perm/code/perm2rank.j,perm,jana2014,ok,,28,28,0,1.0,5,15,0,2,3,4.807,0.624,0.0,5,1,5,0,13,0.4643,0.007,reversible
+reversible-algorithms,perm/code/perm2rank2.j,perm,jana2014,ok,,102,102,0,1.0,8,24,0,3,5,6.672,0.749,0.0,5,3,9,0,16,0.1569,0.011,reversible
+reversible-algorithms,perm/perm.j,perm,jana2014,ok,,18,18,0,1.0,5,25,0,3,2,4.17,0.48,0.0,1,2,1,0,9,0.5,0.002,reversible
+reversible-algorithms,perm/perm2.j,perm,jana2014,ok,,15,15,0,1.0,5,25,0,3,2,3.907,0.512,0.0,1,2,1,0,7,0.4667,0.002,reversible
+reversible-algorithms,perm/perm2invtab1.j,perm,jana2014,ok,,10,10,0,1.0,2,25,0,2,0,3.322,0.0,0.0,0,0,0,0,2,0.2,0.005,reversible
+reversible-algorithms,qsort/code/qsort.j,qsort,jana2014,ok,,387,204,183,1.8971,11,62,1,2,9,8.596,1.047,0.924,5,7,22,10,220,0.5685,0.02,reversible
+reversible-algorithms,qsort/code/qsort1.j,qsort,jana2014,ok,,388,205,183,1.8927,11,62,1,2,9,8.6,1.047,0.92,5,7,22,10,221,0.5696,0.021,reversible
+reversible-algorithms,qsort/code/qsort2.j,qsort,jana2014,ok,,362,283,79,1.2792,10,62,1,2,8,8.5,0.941,0.355,5,7,27,5,204,0.5635,0.016,reversible
+reversible-algorithms,qsort/qsort2.j,qsort,jana2014,ok,,515,406,109,1.2685,9,64,0,2,7,9.008,0.777,0.343,5,9,26,5,256,0.4971,0.027,reversible
+reversible-algorithms,qsort/queue5e.j,qsort,jana2014,ok,,381,207,174,1.8406,9,82,0,2,7,8.574,0.816,0.88,3,4,24,24,81,0.2126,0.016,reversible
+reversible-algorithms,rank/rank.j,rank,jana2014,ok,,2171,787,1384,2.7586,11,41,0,2,9,11.084,0.812,1.464,3,8,126,124,285,0.1313,0.104,reversible
+reversible-algorithms,rank/rank_lexicographic.j,rank,jana2014,ok,,722,10,712,72.2,13,62,0,2,11,9.496,1.158,6.174,3,10,22,24,436,0.6039,0.034,reversible
+reversible-algorithms,rank/rank_perm.j,rank,jana2014,ok,,262,205,57,1.278,10,24,0,2,8,8.033,0.996,0.354,5,13,17,7,64,0.2443,0.021,reversible
+reversible-algorithms,scc/kosaraju.j,scc,jana2014,ok,,311,311,0,1.0,12,52,0,8,4,8.281,0.483,0.0,6,8,11,0,187,0.6013,0.026,reversible
+reversible-algorithms,ssort/code/ssort.j,ssort,jana2014,ok,,243,155,88,1.5677,9,58,2,3,6,7.925,0.757,0.649,4,6,14,6,133,0.5473,0.012,reversible
+reversible-algorithms,ssort/code/ssort1.j,ssort,jana2014,ok,,279,17,262,16.4118,10,46,2,3,7,8.124,0.862,4.037,4,6,14,7,109,0.3907,0.017,reversible
+reversible-algorithms,ssort/ssort1.j,ssort,jana2014,ok,,259,171,88,1.5146,9,58,0,3,6,8.017,0.748,0.599,4,6,14,6,95,0.3668,0.014,reversible
+reversible-algorithms,string_search/Force_str_search1-a.j,string_search,jana2014,ok,,43,43,0,1.0,7,42,4,6,1,5.426,0.184,0.0,1,1,1,0,28,0.6512,0.003,reversible
+reversible-algorithms,string_search/Force_str_search1-b.j,string_search,jana2014,ok,,40,40,0,1.0,7,42,4,7,0,5.322,0.0,0.0,1,0,1,0,28,0.7,0.003,reversible
+reversible-algorithms,string_search/Force_str_search1-c.j,string_search,jana2014,ok,,40,40,0,1.0,8,43,4,6,2,5.322,0.376,0.0,1,2,1,0,32,0.8,0.003,reversible
+reversible-algorithms,string_search/Force_str_search2-a.j,string_search,jana2014,ok,,35,35,0,1.0,6,40,4,5,1,5.129,0.195,0.0,1,1,1,0,4,0.1143,0.003,reversible
+reversible-algorithms,string_search/Force_str_search2-b.j,string_search,jana2014,ok,,31,31,0,1.0,6,40,4,6,0,4.954,0.0,0.0,1,0,1,0,4,0.129,0.003,reversible
+reversible-algorithms,string_search/Force_str_search2-c.j,string_search,jana2014,ok,,38,38,0,1.0,6,42,4,5,1,5.248,0.191,0.0,1,1,1,0,4,0.1053,0.003,reversible
+reversible-algorithms,string_search/Force_str_search_rejected.j,string_search,jana2014,error,line 12: Expecting identifier,,,,,,,,,,,,,,,,,,,0.001,by_design
+reversible-algorithms,string_search/kmp.j,string_search,jana2014,error,line 34: Assertion failed: should be false,,,,,,,,,,,,,,,,,,,0.003,by_design
+reversible-algorithms,string_search/kmp1.j,string_search,jana2014,error,line 27: Assertion failed: should be false,,,,,,,,,,,,,,,,,,,0.003,by_design
+reversible-algorithms,string_search/kmp2.j,string_search,jana2014,ok,,168,168,0,1.0,10,51,0,8,2,7.392,0.271,0.0,2,4,2,0,67,0.3988,0.01,reversible
+reversible-algorithms,toposort/toposort.j,toposort,jana2014,ok,,160,160,0,1.0,9,32,0,5,4,7.322,0.546,0.0,5,7,6,0,68,0.425,0.01,reversible
+reversible-algorithms,treesort/treesort.j,treesort,jana2014,ok,,423,423,0,1.0,16,89,0,13,3,8.725,0.344,0.0,7,6,71,0,208,0.4917,0.046,reversible
