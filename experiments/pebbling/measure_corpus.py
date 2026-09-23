@@ -13,8 +13,10 @@ Usage:
       [--out results] [--timeout 60] [--no-scaling] [--no-timelines]
       [--scratch DIR] [--summary-only]
 
-PyJanus is imported from $PYJANUS (default /home/claude/bennett/pyjanus); no
-file of PyJanus or of the corpora is ever modified.  Scaling variants are
+PyJanus is imported from $PYJANUS if set, otherwise from a sibling checkout
+../../../pyjanus relative to this script (i.e. a `pyjanus` directory next to the
+RFCL checkout); if neither exists the script exits with an error.  No file of
+PyJanus or of the corpora is ever modified.  Scaling variants are
 written to --scratch (temp copies only).
 
 Measured quantities (per run)
@@ -59,7 +61,24 @@ import time
 import traceback
 from collections import Counter, defaultdict
 
-PYJANUS = os.environ.get("PYJANUS", "/home/claude/bennett/pyjanus")
+from pathlib import Path
+
+
+def _locate_pyjanus() -> str:
+    """$PYJANUS if set, else the sibling checkout ../../../pyjanus, else fail."""
+    env = os.environ.get("PYJANUS")
+    if env:
+        return env
+    sibling = (Path(__file__).resolve().parent / ".." / ".." / ".." / "pyjanus").resolve()
+    if (sibling / "jana_py").is_dir():
+        return str(sibling)
+    sys.exit(
+        "measure_corpus.py: PyJanus checkout not found (no $PYJANUS and no "
+        f"sibling checkout at {sibling}); set PYJANUS to a PyJanus checkout"
+    )
+
+
+PYJANUS = _locate_pyjanus()
 sys.path.insert(0, PYJANUS)
 
 from jana_py.cli import parse_for_std  # noqa: E402
