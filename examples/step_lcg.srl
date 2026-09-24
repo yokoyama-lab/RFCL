@@ -1,0 +1,5 @@
+# One step of the non-injective map x -> (5x + 3) mod 64, out of place.
+# The map loses information (it is 4-to-1 on 0..255), so running it in
+# place is irreversible; multi-level Bennett runs it without keeping history.
+(x) (x y) ()
+y += (- (+ (* 5 x) 3) (* (/ (+ (* 5 x) 3) 64) 64));
