@@ -100,7 +100,7 @@ J's entry value, while other arguments differ. This is the reversible-sorting
 idiom `call bsort(a, g); uncall bsort(ord, g)`: the uncall clears the
 garbage g and computes the permutation in ord. Strict and loose bracket what
 an invocation-level analysis can call uncomputation. Eight hand-made cases
-(`semantic_cases/`, `test_semantic_forward.py`) pin the definition (10 tests); each of
+(`semantic_cases/`, `test_semantic_forward.py`) pin the definition (9 tests); each of
 five mutations of the matching rule fails at least one of them.
 
 Over the same 120 programs (`results/semantic_classes.md`,
