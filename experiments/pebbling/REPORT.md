@@ -99,8 +99,8 @@ also accepts a partial inverse: I returns *some* storage that J changed to
 J's entry value, while other arguments differ. This is the reversible-sorting
 idiom `call bsort(a, g); uncall bsort(ord, g)`: the uncall clears the
 garbage g and computes the permutation in ord. Strict and loose bracket what
-an invocation-level analysis can call uncomputation. Eight hand-made cases
-(`semantic_cases/`, `test_semantic_forward.py`) pin the definition (9 tests); each of
+an invocation-level analysis can call uncomputation. Nine hand-made cases
+(`semantic_cases/`, `test_semantic_forward.py`) pin the definition (10 tests); each of
 five mutations of the matching rule fails at least one of them.
 
 Over the same 120 programs (`results/semantic_classes.md`,
@@ -132,6 +132,13 @@ Over the same 120 programs (`results/semantic_classes.md`,
 * One loose-only false-looking case: treesort.j (no uncalls) gets 1.4 %
   reverse work from a call that restores one storage location, so its loose
   class is B. It is kept, not filtered.
+
+Machine-checked (Lean, `proofs/README.md`): the incremental accounting counts
+exactly the steps inside some paired invocation, nested pairs once
+(`run_eq`); strict ≤ loose ≤ total (`strict_le_loose_le_total`); and a
+compute–copy–uncompute on untouched arguments is always strictly paired
+(`uncall_pairs`). The storage-key identity is not proved; the cases check it
+(`semantic_cases/nested.j`: 18 steps, 11 strict, not 14).
 
 Still not seen: uncomputation written inline as statements; there is no
 invocation to pair.

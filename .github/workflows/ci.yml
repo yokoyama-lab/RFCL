@@ -33,3 +33,21 @@ jobs:
       # when the external Jana interpreter is not available.
       - name: Run tests
         run: python -m unittest discover -s tests_py -v
+
+  lean:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@v1
+        with:
+          lake-package-directory: proofs/lean
+          build: true
+          test: false
+          lint: false
+          use-mathlib-cache: false
+      # fail on sorry: every theorem must depend only on the standard axioms
+      - name: Axiom check
+        working-directory: proofs/lean
+        run: |
+          lake env lean AxiomCheck.lean | tee axioms.txt
+          ! grep -q sorryAx axioms.txt

@@ -25,7 +25,7 @@ and conditional reverse (`rif`/`rfi`) constructs described by Moriyama (2009).
 - **Landauer entropy analysis**: measure information erasure per step (always 0 for reversible programs)
 - **Bennett transformation**: automatically convert computations to garbage-free reversible form
 - **Time-space tradeoff analyzer**: measure and compare with the exact single-level counts (T_rev = 2T + |outputs| + 7)
-- **Multi-level Bennett (pebble game)**: compile a step program and a pebbling schedule (linear, Bennett 1989 (k, m), or fewest moves under a pebble budget) into a clean SRL program (`pebble` subcommand; `experiments/multilevel/`)
+- **Multi-level Bennett (pebble game)**: compile a step program and a pebbling schedule (linear, Bennett 1989 (k, m), or fewest moves under a pebble budget) into a clean SRL program (`pebble` subcommand, `--compact` for a loop-based program whose size does not grow with n; `experiments/multilevel/`)
 - **Quantum circuit compiler**: compile SRL programs to Toffoli/CNOT circuits (OpenQASM 2.0)
 - **Reverse-mode automatic differentiation**: tape-free gradient computation via reversibility
 - **Program synthesis**: enumerate SRL programs from input/output examples

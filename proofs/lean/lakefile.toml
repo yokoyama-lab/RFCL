@@ -1,0 +1,5 @@
+name = "RFCLProofs"
+defaultTargets = ["RFCLProofs"]
+
+[[lean_lib]]
+name = "RFCLProofs"

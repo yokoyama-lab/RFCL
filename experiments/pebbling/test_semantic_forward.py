@@ -76,6 +76,13 @@ class SemanticForwardTests(unittest.TestCase):
         r = self.run_case("const_arg.j")
         self.assertEqual((r["n_paired"], r["n_partial"]), (1, 0))
 
+    def test_nested_pairs_are_not_counted_twice(self):
+        # 18 steps; strict reverse work = 3 (inner uncall in the call of outer)
+        # + 8 (the uncall of outer, which contains another inner pair) = 11,
+        # not 3 + 3 + 8 (proofs/lean: run_eq)
+        r = self.run_case("nested.j")
+        self.assertEqual((r["total_steps"], r["sem_uncompute_steps"], r["n_paired"]), (18, 11, 3))
+
     def test_self_inverse_procedure_called_twice_pairs(self):
         r = self.run_case("twice.j")
         self.assertEqual((r["n_paired"], r["n_paired_same_dir"]), (1, 1))
