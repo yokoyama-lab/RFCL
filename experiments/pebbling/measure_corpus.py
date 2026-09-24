@@ -56,6 +56,7 @@ import os
 import random
 import re
 import sys
+import tempfile
 import threading
 import time
 import traceback
@@ -97,9 +98,7 @@ from jana_py.validate import validate_program  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DEFAULT_OUT = os.path.join(HERE, "results")
-DEFAULT_SCRATCH = (
-    "/tmp/claude-0/-home-claude/06ba6152-b045-59b6-8290-c44e49ea1de1/scratchpad/measureA"
-)
+DEFAULT_SCRATCH = os.path.join(tempfile.gettempdir(), "rfcl-pebbling-scaling")
 
 # dialects tried, in order, per file extension (first success wins; on total
 # failure the attempt that got furthest -- execution > validate > parse -- is

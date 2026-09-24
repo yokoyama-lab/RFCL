@@ -9,10 +9,14 @@ Files: `measure_corpus.py` (runs a corpus under PyJanus, writes
 `results/timelines/*.jsonl`), `rfcl_k1_sweep.py` (single-level Bennett on RFCL's SRL
 examples, writes `results/rfcl_k1_measurements.csv`), `analyze.py` (classifies, fits,
 writes `results/classification.csv`, `results/deviation_table.md`, `results/summary.json`
-and `results/fig_bennett_vs_measured.{png,pdf,svg}`).
+and `results/fig_bennett_vs_measured.{png,pdf,svg}`), `semantic_forward.py`
+(forward work by effect instead of by `uncall` nesting; writes
+`results/semantic_measurements.csv` and `results/semantic_classes.md`; checked by
+`test_semantic_forward.py` on `semantic_cases/`).
 
 Run, from this directory, with /usr/bin/python3 (numpy + matplotlib needed by analyze.py only):
     PYJANUS=/path/to/PyJanus python3 measure_corpus.py /path/to/reversible-algorithms /path/to/janus-examples --out results
     python3 rfcl_k1_sweep.py
     python3 analyze.py
+    PYJANUS=/path/to/PyJanus python3 semantic_forward.py /path/to/reversible-algorithms
 Nothing outside this directory is modified; PyJanus and the corpora are read only.
