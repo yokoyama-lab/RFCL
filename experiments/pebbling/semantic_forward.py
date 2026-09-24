@@ -53,6 +53,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 
 import measure_corpus as mc  # noqa: E402  (locates and imports PyJanus)
+from jana_py.ast import LvalExpr  # noqa: E402
 from jana_py.runtime import ArraySliceProxy, CellProxy, StructFieldProxy  # noqa: E402
 
 MAX_DONE_PER_PROC = 4096
@@ -96,6 +97,10 @@ class SemanticRuntime(mc.MeasuringRuntime):
     def _bind_args(self, caller, name, args, pos):
         proc, frame, checks = super()._bind_args(caller, name, args, pos)
         value_cells = {id(cell) for _, cell in checks}
+        # a non-l-value argument (value argument, or a literal/expression to a
+        # constant parameter) gets a fresh cell per call: match it by position
+        value_cells |= {id(frame.vars[p.ident.name]) for p, a in zip(proc.params, args)
+                        if not isinstance(a, LvalExpr)}
         rec = _Inv()
         rec.proc = name
         rec.direction = self._pending_dir

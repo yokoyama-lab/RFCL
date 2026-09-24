@@ -16,8 +16,9 @@ sys.path.insert(0, str(HERE))
 
 def _pyjanus_available() -> bool:
     env = os.environ.get("PYJANUS")
-    sibling = HERE.parent.parent.parent / "pyjanus"
-    return bool(env and Path(env, "jana_py").is_dir()) or (sibling / "jana_py").is_dir()
+    parent = HERE.parent.parent.parent
+    return bool(env and Path(env, "jana_py").is_dir()) or any(
+        (parent / d / "jana_py").is_dir() for d in ("PyJanus", "pyjanus"))
 
 
 @unittest.skipUnless(_pyjanus_available(), "PyJanus checkout not found")
@@ -70,6 +71,10 @@ class SemanticForwardTests(unittest.TestCase):
     def test_strict_pairs_count_in_loose_too(self):
         r = self.run_case("ccu.j")
         self.assertEqual(r["sem_uncompute_steps_loose"], r["sem_uncompute_steps"])
+
+    def test_literal_to_constant_parameter_still_pairs(self):
+        r = self.run_case("const_arg.j")
+        self.assertEqual((r["n_paired"], r["n_partial"]), (1, 0))
 
     def test_self_inverse_procedure_called_twice_pairs(self):
         r = self.run_case("twice.j")

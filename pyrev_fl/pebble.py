@@ -345,7 +345,7 @@ class PebblingResult:
     declared_space: int         # variables declared by the compiled program
     step_time: float            # measured time of the plain forward run / n
     baseline_time: int          # measured time of n forward steps (history kept)
-    output: dict[str, int]      # x_n
+    output: dict[str, int]      # x_n, keyed by the step's state names
 
 
 def analyze_pebbling(spec: StepSpec, moves: list[Move], n: int,
@@ -369,7 +369,7 @@ def analyze_pebbling(spec: StepSpec, moves: list[Move], n: int,
         declared_space=declared,
         step_time=base_metrics.time_steps / n,
         baseline_time=base_metrics.time_steps,
-        output={v: store[v] for v in peb.output_vars},
+        output={x: store[v] for x, v in zip(spec.state, peb.output_vars)},
     )
 
 

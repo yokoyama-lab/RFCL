@@ -108,6 +108,12 @@ class CompileTests(unittest.TestCase):
             self.assertEqual(r.baseline_time, 3 * n)
             self.assertLessEqual(r.peak_space, r.declared_space)
 
+    def test_output_is_keyed_by_state_names_for_every_schedule(self):
+        spec = _spec("step_fib.srl")
+        for moves in (optimal_schedule(16, 5), bennett_schedule(2, 4), linear_schedule(16)):
+            r = analyze_pebbling(spec, moves, 16, [0, 1])
+            self.assertEqual(r.output, {"a": 987, "b": 1597})
+
     def test_step_program_shape_is_checked(self):
         with self.assertRaises(ValueError):
             step_spec(parse_program("(x) (y) ()\ny += x;"))
