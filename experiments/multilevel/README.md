@@ -13,5 +13,6 @@ needs matplotlib).
 
     python3 sweep.py
     python3 analyze.py
+    python3 compact.py   # loop-based compilation vs. unrolled (results/compact.csv)
 
 Pure RFCL, no external checkouts needed.

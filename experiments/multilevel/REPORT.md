@@ -89,6 +89,39 @@ T·((2m−1)/m)^k, space S·(k(m−1)+1) with S = |X| per checkpoint.
 The old docstring's "T·2^k time, S + k·log₂T space" is neither (fixed in
 `tradeoff.py`).
 
+## Result 3: a compact (loop-based) compilation
+
+`compile_pebbling` unrolls the schedule, so code size = running time
+(Limitation 1 below). `pyrev_fl/pebble_compact.py` compiles Bennett's scheme
+with per-level segment counts ms (`bennett_mixed_schedule`, innermost level
+first) into a program of 22 statements per level plus the step: level j is
+one `from`-loop over t = 0..2m_j − 2 whose body runs the level below *once in
+the text* under `rif (>= t m_j)`, forward to place checkpoint t + 1 and
+backwards to erase checkpoint 2m_j − 1 − t. Checkpoints are array cells
+`<x>__ck[F + 1]`, F = Σ(m_j − 1) + 1; the source/target cells of the level
+below are computed from t before and uncomputed after. The leaf goes through
+scalars because the checker rejects `X[d] += f(X[s])`.
+
+`compact.py`, 45 runs (three steps; ms = [2]^k for k ≤ 10 and [4]^k for
+k ≤ 5, so n ≤ 1024): every output is x_n, and on every run
+
+  time(compact) = time(unrolled) + Σ_j runs_j·(15(2m_j − 1) + 2) + moves·3|X| + 3|X| + 2
+
+exactly (`control_overhead`; runs_j = number of level-j executions).
+
+| n = 1024 | code size compact / unrolled | time compact / unrolled | control steps per move | peak non-zero compact / unrolled |
+|---|---|---|---|---|
+| lcg, m = 2 (k = 10) | 229 / 59 049 | 27.5 | 26.5 | 55 / 12 |
+| tri, m = 2 (k = 10) | 235 / 413 343 | 2.53 | 26.5 | 57 / 14 |
+| fib, m = 4 (k = 5) | 127 / 50 421 | 8.94 | 23.8 | 57 / 33 |
+
+The price is a constant number of control steps per move (→ (15(2m−1) + 2)/(2m−2)
++ 3|X|), which dominates for one-statement steps and is a factor 2–2.5 for
+the loop step, and O(k) extra scalars (per level an index, a counter and two
+cell numbers). Only Bennett's regular scheme is compiled this way: the
+fewest-move schedules split unevenly per (n, s) and would need a control
+stack.
+
 ## Prior work
 
 Everything about the pebble game itself above is known; this experiment
@@ -117,10 +150,9 @@ with no hidden control-flow constant.
 
 ## Limitations
 
-1. The compiled program is straight-line, so its size equals its running
-   time (one copy of the step per move). A loop/recursion-based encoding of
-   the schedule would need a pebble stack or index arithmetic in SRL; not
-   done.
+1. `compile_pebbling` is straight-line (size = running time). The compact
+   encoding (Result 3) removes that for Bennett's (mixed-radix) scheme but not
+   for the fewest-move schedules, and n must factor into the chosen ms.
 2. Space counts checkpoint registers of |X| variables each. It ignores the
    step's temps (shared, constant) and bit widths.
 3. The recursion's optimality beyond n = 18 rests on the recursion, not on
@@ -135,4 +167,5 @@ with no hidden control-flow constant.
 cd experiments/multilevel
 python3 sweep.py      # results/schedules.csv, results/measured.csv (exit 1 if any row deviates)
 python3 analyze.py    # results/fig_tradeoff.{png,pdf,svg}, results/bennett_vs_optimal.md (needs matplotlib)
+python3 compact.py    # results/compact.csv (exit 1 on a wrong output or inexact overhead)
 ```

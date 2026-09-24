@@ -123,6 +123,27 @@ def bennett_schedule(k: int, m: int) -> list[Move]:
     return moves
 
 
+def bennett_mixed_schedule(ms: list[int]) -> list[Move]:
+    """Bennett 1989 with a different segment count per level.
+
+    ``ms[0]`` is the innermost level.  Covers n = prod(ms) steps in
+    prod(2m - 1) moves with sum(m - 1) + 1 pebbles; ``bennett_schedule(k, m)``
+    is ``bennett_mixed_schedule([m] * k)``."""
+    if any(m < 2 for m in ms):
+        raise ValueError("every level needs m >= 2")
+    moves: list[Move] = [1]
+    width = 1
+    for m in ms:
+        sub = moves
+        moves = []
+        for i in range(m):
+            moves += _shift(sub, i * width)
+        for i in range(m - 2, -1, -1):
+            moves += _shift(_reverse(sub), i * width)
+        width *= m
+    return moves
+
+
 @lru_cache(maxsize=None)
 def _opt(n: int, s: int) -> tuple[float, int]:
     """(min moves, best split) to pebble node n from node 0 with s pebbles.
