@@ -71,7 +71,8 @@ n = 2 → 12. CCU programs converge to 2 from below (1.57 → 1.98), never above
 
 ## Deviations and what they suggest
 
-With these metrics, in this corpus, T·2^k with S + k·log₂T does not occur. The nested
+With these metrics, in this corpus, T·2^k with S + k·log₂T does not occur
+(the D and E rows above use the syntactic count; see Result 4). The nested
 case (fact.j) is k nested compute-copy-uncompute embeddings: ×2 time and +1 ancilla per
 level, i.e. S + k·c, which is what the docstring's time formula describes. Bennett
 1989's k-level scheme with n segments per level gives T_rev = T·((2n−1)/n)^k and
@@ -84,6 +85,64 @@ corpus; the closest is `dp/lis.j`, which uncalls a helper and lands in C. Class 
 shows "forward work" needs a semantic definition, not the syntactic fwd/uncall split;
 otherwise rank_lexicographic reads as a 72× overhead.
 
+## Result 4: forward work defined by effect (`semantic_forward.py`)
+
+Limitation (1) and class E come from one syntactic rule: a step is reverse
+work iff it runs inside an `uncall`. `semantic_forward.py` replaces it with
+a definition by effect. An invocation I (call *or* uncall) **strictly
+uncomputes** an earlier completed invocation J of the same procedure iff
+their parameters are bound to the same storage, I starts from J's exit
+values and ends at J's entry values, and J changed something. Only such I
+are reverse work; an uncall that nothing pairs with is forward work, and a
+`call` that undoes an earlier `uncall` is reverse work. The **loose** count
+also accepts a partial inverse: I returns *some* storage that J changed to
+J's entry value, while other arguments differ. This is the reversible-sorting
+idiom `call bsort(a, g); uncall bsort(ord, g)`: the uncall clears the
+garbage g and computes the permutation in ord. Strict and loose bracket what
+an invocation-level analysis can call uncomputation. Nine hand-made cases
+(`semantic_cases/`, `test_semantic_forward.py`) pin the definition (10 tests); each of
+five mutations of the matching rule fails at least one of them.
+
+Over the same 120 programs (`results/semantic_classes.md`,
+`results/semantic_measurements.csv`):
+
+| class | syntactic | strict | loose |
+|---|---|---|---|
+| A1 | 54 | 73 | 57 |
+| A2 | 5 | 5 | 5 |
+| B | 16 | 22 | 22 |
+| C | 37 | 19 | 32 |
+| D | 5 | 1 | 4 |
+| E | 3 | 0 | 0 |
+
+* **Class E disappears under both counts.** rank_lexicographic 72.2 → 1.43,
+  ssort1 16.4 → 1.51: their main `uncall` is unpaired (forward), and the
+  pairs inside it are ordinary compute/uncompute. decfac2rank 18.0 → 1.0: a
+  single unpaired uncall, i.e. an in-place algorithm run backwards.
+* **Class D shrinks.** Under the strict count only fact.j stays nested
+  (8.32; call/uncall at every level, 31 of 31 uncalls paired). isort1
+  (3.86 → 1.51) and perm2decfac (2.96 → 1.43) were D only because unpaired
+  uncalls were charged as reverse work. breadth_first_search and rank are
+  D only under the loose count (2.16, 2.21).
+* **13 of the 37 syntactic C programs have no exact pair at all** (bsort2,
+  msort1, hsort1–3, several isort and shell_sort variants, queue5e). They
+  are the sorting idiom above: under the loose count 31 of 37 stay in C. So
+  "single-level CCU" in the corpus mostly means *garbage-clearing inverse on
+  new data*, not Bennett's copy-then-uncompute on the same data.
+* One loose-only false-looking case: treesort.j (no uncalls) gets 1.4 %
+  reverse work from a call that restores one storage location, so its loose
+  class is B. It is kept, not filtered.
+
+Machine-checked (Lean, `proofs/README.md`): the incremental accounting counts
+exactly the steps inside some paired invocation, nested pairs once
+(`run_eq`); strict ≤ loose ≤ total (`strict_le_loose_le_total`); and a
+compute–copy–uncompute on untouched arguments is always strictly paired
+(`uncall_pairs`). The storage-key identity is not proved; the cases check it
+(`semantic_cases/nested.j`: 18 steps, 11 strict, not 14).
+
+Still not seen: uncomputation written inline as statements; there is no
+invocation to pair.
+
 ## Reproduce
 
 ```
@@ -91,6 +150,8 @@ cd experiments/pebbling
 PYJANUS=/path/to/PyJanus python3 measure_corpus.py /path/to/reversible-algorithms /path/to/janus-examples --out results
 python3 rfcl_k1_sweep.py
 python3 analyze.py
+PYJANUS=/path/to/PyJanus python3 semantic_forward.py /path/to/reversible-algorithms
+PYJANUS=/path/to/PyJanus python3 -m unittest test_semantic_forward
 ```
 
 ## Related measurement in progress

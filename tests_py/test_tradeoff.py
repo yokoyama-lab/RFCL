@@ -109,6 +109,27 @@ class TradeoffFormatTests(unittest.TestCase):
         self.assertIn("Space trace", text)
 
 
+class ExactPredictionTests(unittest.TestCase):
+
+    def test_time_prediction_is_exact_on_the_k1_sweep_inputs(self):
+        import csv
+        rows = EXAMPLES.parent / "experiments/pebbling/results/rfcl_k1_measurements.csv"
+        checked = 0
+        with open(rows) as f:
+            for row in csv.DictReader(f):
+                if row.get("status") != "ok":
+                    continue
+                prog = parse_program((EXAMPLES / row["program"]).read_text())
+                inputs = [int(v) for v in row["inputs"].split()]
+                r = analyze_tradeoff(prog, inputs)
+                T = r.original.time_steps
+                self.assertEqual(r.bennett.time_steps, 2 * T + len(prog.outputs) + 7, row)
+                self.assertAlmostEqual(r.theoretical_time_ratio * T, r.bennett.time_steps)
+                self.assertLessEqual(r.bennett.peak_space, r.theoretical_space_bound, row)
+                checked += 1
+        self.assertEqual(checked, 28)
+
+
 class TradeoffCliTests(unittest.TestCase):
 
     def test_cli_tradeoff(self):

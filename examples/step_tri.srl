@@ -1,0 +1,13 @@
+# Data-dependent step: y = x / 2 + T(x mod 8), T(k) = 1 + ... + k,
+# computed with a loop whose iteration count depends on x.  The temps
+# i and k are returned to zero, so the step is clean.
+(x) (x y) (i k)
+k += (- x (* (/ x 8) 8));
+from (= i 0) do
+loop
+  i += 1;
+  y += i;
+until (= i k)
+i -= k;
+k -= (- x (* (/ x 8) 8));
+y += (/ x 2);

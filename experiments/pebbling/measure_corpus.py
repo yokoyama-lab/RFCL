@@ -14,7 +14,7 @@ Usage:
       [--scratch DIR] [--summary-only]
 
 PyJanus is imported from $PYJANUS if set, otherwise from a sibling checkout
-../../../pyjanus relative to this script (i.e. a `pyjanus` directory next to the
+../../../PyJanus (or ../../../pyjanus) relative to this script (i.e. a checkout next to the
 RFCL checkout); if neither exists the script exits with an error.  No file of
 PyJanus or of the corpora is ever modified.  Scaling variants are
 written to --scratch (temp copies only).
@@ -56,6 +56,7 @@ import os
 import random
 import re
 import sys
+import tempfile
 import threading
 import time
 import traceback
@@ -65,16 +66,18 @@ from pathlib import Path
 
 
 def _locate_pyjanus() -> str:
-    """$PYJANUS if set, else the sibling checkout ../../../pyjanus, else fail."""
+    """$PYJANUS if set, else a sibling checkout ../../../PyJanus (or pyjanus), else fail."""
     env = os.environ.get("PYJANUS")
     if env:
         return env
-    sibling = (Path(__file__).resolve().parent / ".." / ".." / ".." / "pyjanus").resolve()
-    if (sibling / "jana_py").is_dir():
-        return str(sibling)
+    parent = (Path(__file__).resolve().parent / ".." / ".." / "..").resolve()
+    for name in ("PyJanus", "pyjanus"):  # ghq checkout name, then the old spelling
+        sibling = parent / name
+        if (sibling / "jana_py").is_dir():
+            return str(sibling)
     sys.exit(
         "measure_corpus.py: PyJanus checkout not found (no $PYJANUS and no "
-        f"sibling checkout at {sibling}); set PYJANUS to a PyJanus checkout"
+        f"sibling PyJanus checkout under {parent}); set PYJANUS to a PyJanus checkout"
     )
 
 
@@ -97,9 +100,7 @@ from jana_py.validate import validate_program  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DEFAULT_OUT = os.path.join(HERE, "results")
-DEFAULT_SCRATCH = (
-    "/tmp/claude-0/-home-claude/06ba6152-b045-59b6-8290-c44e49ea1de1/scratchpad/measureA"
-)
+DEFAULT_SCRATCH = os.path.join(tempfile.gettempdir(), "rfcl-pebbling-scaling")
 
 # dialects tried, in order, per file extension (first success wins; on total
 # failure the attempt that got furthest -- execution > validate > parse -- is

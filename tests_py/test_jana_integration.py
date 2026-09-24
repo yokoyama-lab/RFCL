@@ -7,6 +7,7 @@ an independent implementation.
 from __future__ import annotations
 
 import os
+import shutil
 import subprocess
 import tempfile
 import unittest
@@ -16,11 +17,20 @@ from pyrev_fl.janus_pretty import render_janus
 from pyrev_fl.parser import parse_program
 
 EXAMPLES = Path(__file__).parent.parent / "examples"
-JANA = Path("/home/a/.local/bin/jana")
+def _find_jana() -> Path | None:
+    """$JANA if set, else the first `jana` on PATH, else None (tests skip)."""
+    env = os.environ.get("JANA")
+    if env:
+        return Path(env)
+    found = shutil.which("jana")
+    return Path(found) if found else None
+
+
+JANA = _find_jana()
 
 
 def _has_jana() -> bool:
-    return JANA.exists()
+    return JANA is not None and JANA.exists()
 
 
 def _run_jana(janus_src: str, init_stmts: str = "") -> dict[str, int]:

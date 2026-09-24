@@ -1,0 +1,7 @@
+# One Fibonacci step, out of place: (a, b) -> (a2, b2) = (b, a + b).
+# Step program for multi-level Bennett (pyrev_fl.pebble): X is preserved,
+# Y starts at zero, temps return to zero.
+(a b) (a b a2 b2) ()
+a2 += b;
+b2 += a;
+b2 += b;

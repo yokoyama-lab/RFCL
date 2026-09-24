@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 from pathlib import Path
 
 from pyrev_fl.check import check_program
@@ -169,6 +170,21 @@ def main() -> int:
     tradeoff_cmd.add_argument("inputs", nargs="*")
     tradeoff_cmd.add_argument("--json", action="store_true", dest="json_output")
 
+    pebble_cmd = sub.add_parser("pebble", help="multi-level Bennett via the pebble game")
+    pebble_cmd.add_argument("file", help="step program (X) (X Y) (temps)")
+    pebble_cmd.add_argument("inputs", nargs="*")
+    pebble_cmd.add_argument("--steps", type=int, required=True, help="number of steps n")
+    group = pebble_cmd.add_mutually_exclusive_group()
+    group.add_argument("--pebbles", type=int, help="fewest moves with at most this many pebbles")
+    group.add_argument("--levels", type=int, help="Bennett 1989 levels k (needs --segments; n = m**k)")
+    group.add_argument("--linear", action="store_true", help="keep the whole history (2n-1 moves)")
+    group.add_argument("--mixed", help="Bennett 1989 with per-level segments, innermost first, e.g. 2,3,4 (n = product)")
+    pebble_cmd.add_argument("--compact", action="store_true",
+                            help="loop-based program (code size independent of n); needs --levels or --mixed")
+    pebble_cmd.add_argument("--segments", type=int, default=2, help="Bennett 1989 segments m per level")
+    pebble_cmd.add_argument("--emit", action="store_true", help="print the compiled SRL program")
+    pebble_cmd.add_argument("--json", action="store_true", dest="json_output")
+
     args = parser.parse_args()
     try:
         if args.command == "run":
@@ -230,6 +246,8 @@ def main() -> int:
             return _autodiff(Path(args.file), args.inputs, args.output_var, args.json_output, args.jacobian)
         if args.command == "tradeoff":
             return _tradeoff(Path(args.file), args.inputs, args.json_output)
+        if args.command == "pebble":
+            return _pebble(args)
         parser.exit(2, "unknown command\n")
     except ValueError as exc:
         if getattr(args, "json_output", False):
@@ -522,6 +540,86 @@ def _autodiff(path: Path, raw_inputs: list[str], output_var: str, json_output: b
         print(f"\nGradients of {output_var}:")
         for inp, grad in sorted(result.gradients.get(output_var, {}).items()):
             print(f"  d{output_var}/d{inp} = {grad}")
+    return 0
+
+
+def _pebble(args) -> int:
+    from pyrev_fl.pebble import (
+        analyze_pebbling, bennett_mixed_schedule, compile_pebbling, linear_schedule,
+        optimal_schedule, step_spec,
+    )
+    from pyrev_fl.pretty import render_program
+
+    spec = step_spec(parse_program(Path(args.file).read_text()))
+    n = args.steps
+    ms = None
+    if args.levels is not None:
+        ms = [args.segments] * args.levels
+    elif args.mixed is not None:
+        ms = [int(v) for v in args.mixed.split(",")]
+    if ms is not None:
+        if math.prod(ms) != n:
+            raise ValueError(f"--steps must equal the product of the segments = {math.prod(ms)}")
+        moves, label = bennett_mixed_schedule(ms), f"bennett(m={','.join(map(str, ms))})"
+    elif args.compact:
+        raise ValueError("--compact needs --levels or --mixed")
+    elif args.pebbles is not None:
+        moves, label = optimal_schedule(n, args.pebbles), f"optimal(s={args.pebbles})"
+    else:
+        moves, label = linear_schedule(n), "linear"
+    if args.compact:
+        return _pebble_compact(spec, ms, label, args)
+    if args.emit:
+        print(render_program(compile_pebbling(spec, moves, n).program), end="")
+        return 0
+    inputs = [int(v) for v in args.inputs]
+    r = analyze_pebbling(spec, moves, n, inputs)
+    if args.json_output:
+        print(json.dumps({
+            "kind": "pebble", "ok": True, "schedule": label, "n": n,
+            "moves": r.stats.moves, "pebbles": r.stats.pebbles,
+            "time": r.time_steps, "baseline_time": r.baseline_time,
+            "peak_space": r.peak_space, "declared_space": r.declared_space,
+            "output": r.output,
+        }))
+        return 0
+    print(f"schedule        {label}, n = {n}")
+    print(f"moves           {r.stats.moves}  ({r.stats.moves / n:.2f} per step)")
+    print(f"pebbles         {r.stats.pebbles}  (checkpoint registers)")
+    print(f"time            {r.time_steps}  (forward-only run: {r.baseline_time}, ratio {r.time_steps / max(r.baseline_time, 1):.2f})")
+    print(f"space           peak {r.peak_space} non-zero of {r.declared_space} declared")
+    print("output          " + " ".join(f"{k}={v}" for k, v in r.output.items()))
+    return 0
+
+
+def _pebble_compact(spec, ms, label, args) -> int:
+    from pyrev_fl.interpreter import run_program
+    from pyrev_fl.pebble_compact import compile_bennett_compact, statement_count
+    from pyrev_fl.pretty import render_program
+    from pyrev_fl.tradeoff import _measure
+
+    c = compile_bennett_compact(spec, ms)
+    if args.emit:
+        print(render_program(c.program), end="")
+        return 0
+    inputs = [int(v) for v in args.inputs]
+    metrics = _measure(c.program, inputs)
+    store = run_program(c.program, inputs)
+    output = {x: store[o] for x, o in zip(spec.state, c.output_vars)}
+    size = statement_count(c.program.body)
+    if args.json_output:
+        print(json.dumps({
+            "kind": "pebble", "ok": True, "schedule": label + " compact", "n": c.n,
+            "pebbles": c.registers, "time": metrics.time_steps,
+            "peak_space": metrics.peak_space, "statements": size, "output": output,
+        }))
+        return 0
+    print(f"schedule        {label}, compact, n = {c.n}")
+    print(f"pebbles         {c.registers}  (checkpoint cells)")
+    print(f"time            {metrics.time_steps}")
+    print(f"space           peak {metrics.peak_space} non-zero")
+    print(f"program size    {size} statements")
+    print("output          " + " ".join(f"{k}={v}" for k, v in output.items()))
     return 0
 
 

@@ -1,15 +1,32 @@
-"""Bennett time-space tradeoff analyzer.
+"""Bennett time-space tradeoff analyzer (single level).
 
-Measures the time (steps) and space (peak non-zero variables) of:
-1. Original computation
-2. Bennett-transformed computation (single-level)
-3. Multi-level Bennett (pebble game) with configurable depth
+Measures the time (steps) and space (peak non-zero variables) of
+1. the original computation and
+2. its single-level Bennett transform (``bennett.make_reversible_program``),
+and compares them with the exact counts of that transform:
 
-Compares measured values against theoretical predictions:
-- Single-level Bennett: T_rev ≈ 2T, S_rev = S + O(|outputs|)
-- k-level Bennett: T_rev ≈ T · 2^k, S_rev = S + k · log₂(T)
+- time  T_rev = 2T + |outputs| + 7 under this module's step accounting:
+  2T for forward + reverse, |outputs| + 2 for the copies and the two flag
+  updates, and 5 control steps (loop entry, the one loop iteration, loop
+  exit, and one ``rif`` dispatch in each direction);
+- space S_rev <= S + |outputs| + 1 (copies + flag); below it only when an
+  output value is 0.
 
-Reference: Bennett 1989, "Time/Space Trade-offs for Reversible Computation"
+The +7 was measured in experiments/pebbling (28 runs, constant); earlier
+versions predicted +2 and undercounted by exactly those 5 control steps.
+
+Multi-level Bennett (the pebble game) is in ``pyrev_fl.pebble``.  With k
+levels of m segments per level, Bennett 1989 gives, for n = m**k steps of a
+computation with state size S,
+
+- time  (2m - 1)**k step applications, i.e. T_rev = T * ((2m - 1)/m)**k,
+- space k(m - 1) + 1 checkpoints, i.e. S_rev = S * (k(m - 1) + 1).
+
+The often quoted "T * 2**k time, S + k*log2(T) space" matches neither
+scheme: nested single-level embeddings double the time per level but add a
+constant per level, and Bennett 1989 multiplies S rather than adding log T.
+
+Reference: Bennett 1989, "Time/Space Trade-offs for Reversible Computation".
 """
 from __future__ import annotations
 
@@ -74,11 +91,11 @@ def analyze_tradeoff(program: Program, inputs: list[int]) -> TradeoffResult:
     )
     bennett_metrics = _measure(bennett_prog, inputs)
 
-    # Theoretical predictions for single-level Bennett:
-    # Time: ~2T (forward + reverse) + small constant for copy/flag
+    # Exact counts for single-level Bennett (see module docstring):
+    # 2T forward + reverse, |outputs| copies, 2 flag updates, 5 control steps.
     T = max(orig_metrics.time_steps, 1)
     S = max(orig_metrics.peak_space, 1)
-    theoretical_time = 2 * T + len(program.outputs) + 2  # copy stmts + flag ops
+    theoretical_time = 2 * T + len(program.outputs) + 7
     n_outputs = len(program.outputs)
 
     time_ratio = bennett_metrics.time_steps / T if T > 0 else 0
@@ -240,7 +257,7 @@ def format_tradeoff(result: TradeoffResult) -> str:
         f"  Space ratio: {result.space_ratio:.2f}x",
         "",
         "Theoretical predictions (single-level Bennett):",
-        f"  Time ratio:  {result.theoretical_time_ratio:.2f}x (expected ~2x + const)",
+        f"  Time ratio:  {result.theoretical_time_ratio:.2f}x ((2T + |outputs| + 7) / T)",
         f"  Space bound: {result.theoretical_space_bound} (S + |outputs| + 1)",
         "",
         "Space trace (original):  " + _sparkline(result.original.space_trace),
